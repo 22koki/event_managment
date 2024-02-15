@@ -1,6 +1,6 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
+    background-color: #ebebeb;
     color: #333;
     margin: 0;
     padding: 0;
@@ -11,12 +11,12 @@ body {
     margin: 20px auto;
     background-color: #fff;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
 h1, h2 {
-    color: #4e4e4e;
+    color: #2d2d2d;
 }
 
 ul {
@@ -26,13 +26,14 @@ ul {
 
 li {
     border-bottom: 1px solid #ddd;
-    padding: 10px;
+    padding: 15px;
     margin: 0;
 }
 
 a {
-    color: #4c72a0;
+    color: #1909f5;
     text-decoration: none;
+    font-weight: 800;
 }
 
 a:hover {
@@ -40,32 +41,40 @@ a:hover {
 }
 
 form {
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
 }
 
 input {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 12px;
+    padding: 12px;
+    margin-bottom: 25px;
     box-sizing: border-box;
 }
 
 button {
-    background-color: #4c72a0;
+    background-color: #015fda;
     color: #fff;
-    padding: 10px;
+    padding: 12px;
     border: none;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 6px;
 }
 
 button:hover {
-    background-color: #385d8a;
+    background-color: #3479e7;
+}
+.event-actions {
+    margin-top: 8px; /* Add spacing between the links */
 }
 
+.details-link,
+.edit-link,
+.delete-link {
+    font-weight: bold; /* Make the links bolder */
+}
 /* Add more styles as needed */

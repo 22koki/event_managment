@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,39 +8,51 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Event Management System</title>
 </head>
+
 <body>
     <div class="container">
         <h1>Upcoming Events</h1>
         <ul>
             {% for event in upcoming_events %}
-                <li>
-                    {{ event.name }} - {{ event.date }}
-                    <a href="{{ url_for('event_details', event_id=event.id) }}">Details</a>
-                    <a href="{{ url_for('edit_event', event_id=event.id) }}">Edit</a>
-                    <a href="{{ url_for('delete_event', event_id=event.id) }}">Delete</a>
-                </li>
+            <li class="event-item">
+                <div class="event-info">
+                    <span class="event-name">{{ event.name }}</span>
+                    <span class="event-date"> - {{ event.date }}</span>
+                </div>
+                <div class="event-actions">
+                    <a href="{{ url_for('event_details', event_id=event.id) }}" class="details-link">Details</a>
+                    <a href="{{ url_for('edit_event', event_id=event.id) }}" class="edit-link">Edit</a>
+                    <a href="{{ url_for('delete_event', event_id=event.id) }}" class="delete-link">Delete</a>
+                </div>
+            </li>
             {% endfor %}
         </ul>
 
         <h1>Past Events</h1>
         <ul>
             {% for event in past_events %}
-                <li>
-                    {{ event.name }} - {{ event.date }}
-                    <a href="{{ url_for('event_details', event_id=event.id) }}">Details</a>
-                    <a href="{{ url_for('delete_event', event_id=event.id) }}">Delete</a>
-                </li>
+            <li class="event-item">
+                <div class="event-info">
+                    <span class="event-name">{{ event.name }}</span>
+                    <span class="event-date"> - {{ event.date }}</span>
+                </div>
+                <div class="event-actions">
+                    <a href="{{ url_for('event_details', event_id=event.id) }}" class="details-link">Details</a>
+                    <a href="{{ url_for('delete_event', event_id=event.id) }}" class="delete-link">Delete</a>
+                </div>
+            </li>
             {% endfor %}
         </ul>
 
         <h2>Add New Event</h2>
-        <form action="{{ url_for('add_event') }}" method="post">
+        <form action="{{ url_for('add_event') }}" method="post" class="add-event-form">
             <label for="name">Event Name:</label>
             <input type="text" name="name" required>
             <label for="date">Event Date:</label>
             <input type="date" name="date" required>
-            <button type="submit">Add Event</button>
+            <button type="submit" class="add-event-btn">Add Event</button>
         </form>
     </div>
 </body>
+
 </html>

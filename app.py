@@ -1,7 +1,61 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
 app = Flask(__name__)
+app.secret_key = 'your_secret_key'  # Change this to a secure secret key
 
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'
+
+# Dummy users for demonstration purposes
+class User(UserMixin):
+    def __init__(self, id, username, password, role):
+        self.id = id
+        self.username = username
+        self.password = password
+        self.role = role
+
+users = [
+    User(1, 'admin', 'password', 'admin'),
+    User(2, 'user', 'password', 'regular'),
+]
+
+@login_manager.user_loader
+def load_user(user_id):
+    return next((user for user in users if user.id == int(user_id)), None)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        user = next((user for user in users if user.username == username and user.password == password), None)
+
+        if user:
+            login_user(user)
+            flash('Logged in successfully!', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Invalid username or password', 'error')
+
+    return render_template('login.html')
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('Logged out successfully!', 'success')
+    return redirect(url_for('home'))
+
+@app.route('/')
+def home():
+    return render_template('index.html', current_user=current_user)
+
+@app.route('/profile')
+@login_required
+def profile():
+    return render_template('profile.html', current_user=current_user)
 # Dummy data to simulate a database
 events = [
     {"id": 1, "name": "Conference A", "date": "2024-03-15", "participants": ["John", "Jane"]},
@@ -35,7 +89,7 @@ def add_event():
             "participants": []
         }
         events.append(new_event)
-        return redirect(url_for('home'))
+    return redirect(url_for('home'))
 
 @app.route('/edit_event/<int:event_id>', methods=['GET', 'POST'])
 def edit_event(event_id):
