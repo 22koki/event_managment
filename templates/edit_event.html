@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Edit Event</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Event</h1>
+        <form action="{{ url_for('edit_event', event_id=event.id) }}" method="post">
+            <label for="name">Event Name:</label>
+            <input type="text" name="name" value="{{ event.name }}" required>
+            <label for="date">Event Date:</label>
+            <input type="date" name="date" value="{{ event.date }}" required>
+            <button type="submit">Save Changes</button>
+        </form>
+        <a href="{{ url_for('home') }}">Cancel</a>
+    </div>
+</body>
+</html>
