@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% block content %}<section class="panel"><span class="eyebrow">YOUR ORGANISER DESK</span><h1>Hello, {{ g.user.username }}.</h1><p>You can create events, register attendees, and manage check-in.</p><a class="button primary" href="{{ url_for('home') }}">Back to your occasions ↗</a></section>{% endblock %}
